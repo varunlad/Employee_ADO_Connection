@@ -18,7 +18,7 @@ namespace Ado_Net_Demo
                 //Creating object for employeemodel and access the fields
                 EmployeeModel employeeModel = new EmployeeModel();
                 //Retrieve query
-                string query = @"select * from employee_payRoll";
+                string query = @"select * from employee_payRoll where Start_Date >='2016-01-01' and Start_Date <='2021-01-01'";
                 SqlCommand sqlCommand = new SqlCommand(query, sqlconnection);
                 //Open the connection
                 this.sqlconnection.Open();
@@ -59,77 +59,6 @@ namespace Ado_Net_Demo
                 this.sqlconnection.Close();
             }
         }
-        public void UpdateSalary(EmployeeModel model)
-        {
-            try
-            {
-                using (this.sqlconnection)
-                {
-                    EmployeeModel DisplayModel = new EmployeeModel();
-                    SqlCommand command = new SqlCommand("dbo.spUpdateEmployeeDetails", this.sqlconnection);
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Name", model.EmployeeName);
-                    command.Parameters.AddWithValue("@Salary", model.Salary);
-                    command.Parameters.AddWithValue("@Department", model.Department);
-                    sqlconnection.Open();
-                    int result = command.ExecuteNonQuery();
-                    if (result != 0)
-                    {
-                        Console.WriteLine("Update Sucessfull");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unsucessfull");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                sqlconnection.Close();
-            }
-        }
-        public void AddEmployee(EmployeeModel model)
-        {
-            try
-            {
-                using (this.sqlconnection)
-                {
-                    SqlCommand command = new SqlCommand("dbo.SpAddEmployeeDetails1", this.sqlconnection);
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@Name", model.EmployeeName);
-                    command.Parameters.AddWithValue("@Salary", model.Salary);
-                    command.Parameters.AddWithValue("@Basepay", model.BasicPay);
-                    command.Parameters.AddWithValue("@StartDate", model.startDate);
-                    command.Parameters.AddWithValue("@Gender", model.Gender);
-                    command.Parameters.AddWithValue("@Phone", model.PhoneNumber);
-                    command.Parameters.AddWithValue("@Address", model.Address);
-                    command.Parameters.AddWithValue("@Department", model.Department);
-                    command.Parameters.AddWithValue("@TaxablePay", model.TaxablePay);
-                    sqlconnection.Open();
-                    var result = command.ExecuteNonQuery();
-
-                    if (result != 0)
-                    {
-                        Console.WriteLine("Successfully inserted the records");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Insertion of result is unsuccessfull");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                sqlconnection.Close();
-            }
-        }
+       
     }
 }
