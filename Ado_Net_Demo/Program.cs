@@ -12,7 +12,13 @@ namespace Ado_Net_Demo
         {
             //Creating a object for employeerepository
             EmployeeRepository repository = new EmployeeRepository();
-            repository.GetAllEmployee();           
+            repository.GetAllEmployee();
+            //For adding employee
+            EmployeeModel model = new EmployeeModel();
+            model.EmployeeName = "Terissa";
+            model.Department = "Sales";
+            model.Salary = 3000000;
+            repository.UpdateSalary(model);
             Console.ReadLine();
 
         }

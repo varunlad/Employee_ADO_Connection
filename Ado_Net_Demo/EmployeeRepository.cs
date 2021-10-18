@@ -59,7 +59,39 @@ namespace Ado_Net_Demo
                 this.sqlconnection.Close();
             }
         }
-        
-       
+        public void UpdateSalary(EmployeeModel model)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    EmployeeModel DisplayModel = new EmployeeModel();
+                    SqlCommand command = new SqlCommand("dbo.spUpdateEmployeeDetails", this.sqlconnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Name", model.EmployeeName);
+                    command.Parameters.AddWithValue("@Salary", model.Salary);
+                    command.Parameters.AddWithValue("@Department", model.Department);
+                    sqlconnection.Open();
+                    int result = command.ExecuteNonQuery();
+                    if (result != 0)
+                    {
+                        Console.WriteLine("Update Sucessfull");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unsucessfull");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
+        }
+
     }
 }
