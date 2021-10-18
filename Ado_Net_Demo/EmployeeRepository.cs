@@ -92,6 +92,44 @@ namespace Ado_Net_Demo
                 sqlconnection.Close();
             }
         }
+        public void AddEmployee(EmployeeModel model)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    SqlCommand command = new SqlCommand("dbo.SpAddEmployeeDetails1", this.sqlconnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@Name", model.EmployeeName);
+                    command.Parameters.AddWithValue("@Salary", model.Salary);
+                    command.Parameters.AddWithValue("@Basepay", model.BasicPay);
+                    command.Parameters.AddWithValue("@StartDate", model.startDate);
+                    command.Parameters.AddWithValue("@Gender", model.Gender);
+                    command.Parameters.AddWithValue("@Phone", model.PhoneNumber);
+                    command.Parameters.AddWithValue("@Address", model.Address);
+                    command.Parameters.AddWithValue("@Department", model.Department);
+                    command.Parameters.AddWithValue("@TaxablePay", model.TaxablePay);
+                    sqlconnection.Open();
+                    var result = command.ExecuteNonQuery();
 
+                    if (result != 0)
+                    {
+                        Console.WriteLine("Successfully inserted the records");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Insertion of result is unsuccessfull");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
+        }
     }
 }

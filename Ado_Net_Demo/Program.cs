@@ -19,6 +19,16 @@ namespace Ado_Net_Demo
             model.Department = "Sales";
             model.Salary = 3000000;
             repository.UpdateSalary(model);
+            model.EmployeeName = "Bharat";
+            model.TaxablePay = 12080;
+            model.BasicPay = 1234805;
+            model.Gender = "M";
+            model.PhoneNumber = 9834516242;
+            model.Address = "Rasayani";
+            model.startDate = DateTime.Today;
+            model.Department = "IT";
+            model.Salary = 123456;
+            repository.AddEmployee(model);
             Console.ReadLine();
 
         }
