@@ -10,7 +10,11 @@ namespace Ado_Net_Demo
     {
       public static void Main(string[] args)
         {
-           
+            //Creating a object for employeerepository
+            EmployeeRepository repository = new EmployeeRepository();
+            repository.GetAllEmployee();           
+            Console.ReadLine();
+
         }
     }
 }
